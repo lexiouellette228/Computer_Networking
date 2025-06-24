@@ -17,7 +17,7 @@ Sample log file showing the client-side communication sequence, responses, and r
 ### `output_lightserver.txt`
 Sample log file showing the server-side communication, accepted commands, and execution.
 
-### `capture.pcap`
+### `sp.pcap` 
 A packet capture (PCAP) file showing network activity between the client and server for analysis using Wireshark or tcpdump.
 
 ---
