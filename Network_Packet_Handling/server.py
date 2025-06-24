@@ -1,28 +1,28 @@
 # server.py
-# PA1 Network Packet Handling
-# Alexis Ouelltte
+# Network Packet Handling
 
 import socket
 import struct
 
+# Define packet to unpack
 def unpack_packet(conn, header_format):
-    #recieve the header
+    # recieve the header
     header_size = struct.calcsize(header_format)
     header_data = conn.recv(header_size)
 
-    #check for no data and returns none if no data is found
+    # check for no data and returns none if no data is found
     if not header_data: 
         return None
     
-    #unpacking the header based on the bytes recieved
+    # unpacking the header based on the bytes recieved
     version, header_length, service_type, payload_length = struct.unpack(header_format, header_data)
 
-    #get the payload from the length of the payload
+    # get the payload from the length of the payload
     payload_data = conn.recv(payload_length)
     if not payload_data:
         return None
 
-    # Create a string from the header fields
+    # create a string from the header fields
     packet_header_as_string = (
         f"Version: {version}, Header length: {header_length}, "
         f"Service Type: {service_type}, Payload length: {payload_length}, "
@@ -42,7 +42,7 @@ if __name__ == '__main__':
 # header set to 4
 header_format = '!BBBH' 
 
-#create the socket for the connection
+# Create the socket for the connection
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s: 
     s.bind((host, port))
     s.listen()
@@ -51,19 +51,19 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         print(f"Connected by: {addr}")
         while True:
             try:
-            # Receive and unpack packet using the unpack_packet
+            # receive and unpack packet using the unpack_packet
                 payload_string = unpack_packet(conn, header_format)
 
-            #Break after data is loaded
+            # break after data is loaded
                 if payload_string is None:
                     break
 
                 print("recieved packet: ", payload_string)
 
-            #echo back to client
+            # echo back to client
                 conn.sendall(payload_string.encode('utf-8'))
 
-            #Check for error
+            # check for error
             except Exception as e:
                 print("Error")
                 break
