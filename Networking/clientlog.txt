@@ -1,0 +1,30 @@
+Sending HELLO packet
+Received Data: version: 17 type: 0 length: 5
+VERSION ACCEPTED
+Received Message HELLO
+Sending command
+Received data: version: 17 type: 1 length: 7
+VERSION ACCEPTED
+Received Message SUCCESS
+Command Successful
+Closing Socket
+Sending HELLO packet
+Received Data: version: 17 type: 0 length: 5
+VERSION ACCEPTED
+Received Message HELLO
+Sending command
+Received data: version: 17 type: 1 length: 7
+VERSION ACCEPTED
+Received Message SUCCESS
+Command Successful
+Closing Socket
+Sending HELLO packet
+Received Data: version: 17 type: 0 length: 5
+VERSION ACCEPTED
+Received Message HELLO
+Sending command
+Received data: version: 17 type: 1 length: 7
+VERSION ACCEPTED
+Received Message SUCCESS
+Command Successful
+Closing Socket
