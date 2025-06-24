@@ -1,7 +1,5 @@
 # client.py
-# PA1 Network Packet Handling
-# Alexis Ouelltte
-
+# Network Packet Handling
 import argparse
 import socket
 import struct
@@ -10,20 +8,20 @@ def create_packet(version, header_length, service_type, payload):
 # Implement packet creation based on parameters
     payload_bytes = b''
 
-    #for integer
+    # for integer
     if service_type == 1: 
         payload_bytes = struct.pack('!i', int(payload))
-    #for float
+    # for float
     elif service_type == 2: 
         payload_bytes = struct.pack('!f', float(payload))
-    #for string     
+    # for string     
     elif service_type == 3:
         payload_bytes == payload.encode('utf-8')
-    #error
+    # error
     else:
         raise ValueError("Error")
 
-    #payload length is the length of the bytes being sent
+    # payload length is the length of the bytes being sent
     payload_length = len(payload_bytes)
 
     header_format = '!BBBH'
@@ -31,11 +29,11 @@ def create_packet(version, header_length, service_type, payload):
 
     return header + payload_bytes
 
-# use the python struct module to create a fixed length header
-# Fixed length header -> Version (1 byte), Header Length (1 byte) Service Type (1 byte), Payload Length (2 bytes)
-# payload -> variable length
-#depending on the service type, handle encoding of the different types of payload.
-#  service_type 1 = payload is int, service_type 2 = payload isfloat, service_type 3 = payload is stringreturn packet
+# Use the python struct module to create a fixed length header
+# Fixed length header: Version (1 byte), Header Length (1 byte) Service Type (1 byte), Payload Length (2 bytes)
+# payload: variable length
+# Depending on the service type, handle encoding of the different types of payload.
+# service_type 1 = payload is int, service_type 2 = payload isfloat, service_type 3 = payload is stringreturn packet
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Client for packet creation and sending.")
@@ -51,21 +49,21 @@ if __name__ == '__main__':
     # Create and send packet using the create_packet function
     packet = create_packet(args.version, args.header_length, args.service_type, args.payload)
     
-    #connect to the server and send the packet
+    # Connect to the server and send the packet
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         try:
-            #connect to server
+            # connect to server
             s.connect((args.host, args.port))
             print(f"Connected to server at {args.host}:{args.port}.")
 
-            #send packet
+            # send packet
             s.sendall(packet)
             print("The packet has been sent to the server.")
 
-            #recieve the packet and print the payload
+            # recieve the packet and print the payload
             echoed_packet = s.recv(1024)
             print(f"Recieved from the server {echoed_packet.decode('utf-8')}")
         
-        #check for error
+        # Check for error
         except Exception as e:
             print(f"Error: {e}")
