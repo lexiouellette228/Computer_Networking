@@ -1,4 +1,3 @@
-# Computer Networking Programs
 # Simple Protocol – Light Control Client/Server
 
 This project implements a basic TCP-based client-server protocol for controlling a virtual light. The protocol uses structured headers and logs all communication between a client and server to log files.
